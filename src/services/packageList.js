@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import PackageList from "../models/packageList";
+import PackageList from "../models/packageList.js";
 
 const create = asyncHandler(async (req, res) => {
   const { name } = req.body;
