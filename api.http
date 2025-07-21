@@ -9,8 +9,19 @@ Content-Type: application/json
 }
 
 ### Get all package lists
-GET {{baseUrl}}/package-lists
+GET {{baseUrl}}/package-lists/
 
 
 ### Get a package list by id
-GET {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0b
+GET {{baseUrl}}/package-lists/
+
+### Update a package list
+PATCH {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0a
+Content-Type: application/json
+
+{
+  "completed": true
+}
+
+### Delete a package list
+DELETE {{baseUrl}}/package-lists/687e107cc7d7b72a4b0e7e0d
