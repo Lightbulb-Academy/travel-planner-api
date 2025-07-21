@@ -7,4 +7,19 @@ const create = asyncHandler(async (req, res) => {
   res.status(201).json(packageList);
 });
 
-export { create };
+const findAll = asyncHandler(async (req, res) => {
+  const packageLists = await PackageList.find();
+  res.status(200).json(packageLists);
+});
+
+const findById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const packageList = await PackageList.findById(id);
+  if (!packageList) {
+    res.status(404).json({ message: "Package list not found" });
+    return;
+  }
+  res.status(200).json(packageList);
+});
+
+export { create, findAll, findById };

@@ -5,5 +5,12 @@ POST {{baseUrl}}/package-lists
 Content-Type: application/json
 
 {
-  "name": "Cetaphil Cleanser"
+  "name": "Trousers"
 }
+
+### Get all package lists
+GET {{baseUrl}}/package-lists
+
+
+### Get a package list by id
+GET {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0b
