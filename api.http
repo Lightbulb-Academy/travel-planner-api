@@ -25,3 +25,13 @@ Content-Type: application/json
 
 ### Delete a package list
 DELETE {{baseUrl}}/package-lists/687e107cc7d7b72a4b0e7e0d
+
+### Create a user
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe2",
+  "password": "password"
+}

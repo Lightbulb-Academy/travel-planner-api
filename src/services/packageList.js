@@ -27,10 +27,8 @@ const update = asyncHandler(async (req, res) => {
   const packageList = await PackageList.findByIdAndUpdate(
     id,
     {
-      name: req.body.name,
-      ...(req.body.completed && {
-        completed: req.body.completed,
-      }),
+      ...(req.body.name && { name: req.body.name }),
+      ...(req.body.completed && { completed: req.body.completed }),
     },
     { new: true }
   );
