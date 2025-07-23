@@ -6,10 +6,11 @@ import {
   update,
   remove,
 } from "../services/packageList.js";
+import { createPackageList } from "../validators/packageList.js";
 
 const router = Router();
 
-router.post("/", create);
+router.post("/", createPackageList, create);
 router.get("/", findAll);
 router.get("/:id", findById);
 router.patch("/:id", update);
