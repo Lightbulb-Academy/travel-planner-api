@@ -4,9 +4,6 @@
 POST {{baseUrl}}/package-lists
 Content-Type: application/json
 
-{
-  "name": "Trousers"
-}
 
 
 ### Get all package lists
