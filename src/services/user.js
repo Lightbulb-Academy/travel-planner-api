@@ -4,10 +4,12 @@ import { hash } from "bcrypt";
 
 const create = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  // add data validation so that none of the fields are empty
-  // check if email is properly formatted
-  // check if email has already been taken
-  // check if password is at least 8 characters long
+
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ message: "Email already exists" });
+  }
+
   const user = await User.create({
     name,
     email,
