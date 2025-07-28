@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import routes from "./handlers/index.js";
+import { authMiddleware } from "./middlewares/authMiddleware.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose
   });
 
 app.use(express.json());
+app.use(authMiddleware);
 app.use("/", routes);
 
 app.listen(process.env.PORT, () => {
