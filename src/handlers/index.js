@@ -1,6 +1,7 @@
 import { Router } from "express";
 import packageList from "./packageList.js";
 import user from "./user.js";
+import auth from "./auth.js";
 
 const router = Router();
 
