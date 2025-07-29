@@ -3,18 +3,24 @@ import PackageList from "../models/packageList.js";
 
 const create = asyncHandler(async (req, res) => {
   const { name } = req.body;
-  const packageList = await PackageList.create({ name });
+  const { userId } = req.user;
+  const packageList = await PackageList.create({ name, user: userId });
   res.status(201).json(packageList);
 });
 
 const findAll = asyncHandler(async (req, res) => {
-  const packageLists = await PackageList.find();
+  const packageLists = await PackageList.find({
+    user: req.user.userId,
+  });
   res.status(200).json(packageLists);
 });
 
 const findById = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const packageList = await PackageList.findById(id);
+  const packageList = await PackageList.findOne({
+    _id: id,
+    user: req.user.userId,
+  });
   if (!packageList) {
     res.status(404).json({ message: "Package list not found" });
     return;
@@ -24,8 +30,11 @@ const findById = asyncHandler(async (req, res) => {
 
 const update = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const packageList = await PackageList.findByIdAndUpdate(
-    id,
+  const packageList = await PackageList.findOneAndUpdate(
+    {
+      _id: id,
+      user: req.user.userId,
+    },
     {
       ...(req.body.name && { name: req.body.name }),
       ...(req.body.completed && { completed: req.body.completed }),
@@ -41,7 +50,10 @@ const update = asyncHandler(async (req, res) => {
 
 const remove = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const packageList = await PackageList.findByIdAndDelete(id);
+  const packageList = await PackageList.findOneAndDelete({
+    _id: id,
+    user: req.user.userId,
+  });
   if (!packageList) {
     res.status(404).json({ message: "Package list not found" });
     return;

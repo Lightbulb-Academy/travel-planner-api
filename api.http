@@ -1,28 +1,37 @@
 @baseUrl = http://localhost:5000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODgzNTQyOTYwMDQzN2MwNjc2NWY1ZDEiLCJpYXQiOjE3NTM3ODY0MjMsImV4cCI6MTc1NTA4MjQyM30.dRty9opHACgf001-9PaI1Zu2bMMi3fjZ-bkZGgM3e5c
 
 ### Create a package list
 POST {{baseUrl}}/package-lists
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
+{
+  "name": "White T-Shirt"
+}
 
 
 ### Get all package lists
 GET {{baseUrl}}/package-lists/
+Authorization: Bearer {{token}}
 
 
 ### Get a package list by id
-GET {{baseUrl}}/package-lists/
+GET {{baseUrl}}/package-lists/6880c2975239c5d602c485bd
+Authorization: Bearer {{token}}
 
 ### Update a package list
-PATCH {{baseUrl}}/package-lists/687e106cc7d7b72a4b0e7e0a
+PATCH {{baseUrl}}/package-lists/6888a8c4c70ed0c9619facb5
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "completed": true
 }
 
 ### Delete a package list
-DELETE {{baseUrl}}/package-lists/687e107cc7d7b72a4b0e7e0d
+DELETE {{baseUrl}}/package-lists/6880c2975239c5d602c485bd
+Authorization: Bearer {{token}}
 
 ### Create a user
 POST {{baseUrl}}/users
@@ -30,6 +39,25 @@ Content-Type: application/json
 
 {
   "name": "John Doe",
+  "email": "john.doe2@gmail.com",
+  "password": "password"
+}
+
+### Register a user
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john.doe2@gmail.com",
+  "password": "password"
+}
+
+### Login a user
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
   "email": "john.doe2@gmail.com",
   "password": "password"
 }
