@@ -61,3 +61,19 @@ Content-Type: application/json
   "email": "john.doe2@gmail.com",
   "password": "password"
 }
+
+### Create a trip
+POST {{baseUrl}}/trips
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Varanasi, Ayodhya, Mathura, Vrindavan",
+  "startDate": "2025-08-01",
+  "endDate": "2025-08-10",
+  "destinations": ["Varanasi", "Ayodhya", "Mathura", "Gokul", "Vrindavan", "Barsana", "Nandgaon"],
+  "budget": {
+    "total": 50000,
+    "spent": 0
+  }
+}
