@@ -68,10 +68,10 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "Varanasi, Ayodhya, Mathura, Vrindavan",
-  "startDate": "2025-08-01",
-  "endDate": "2025-08-10",
-  "destinations": ["Varanasi", "Ayodhya", "Mathura", "Gokul", "Vrindavan", "Barsana", "Nandgaon"],
+  "title": "Pokhara, Mustang and Manakamana",
+  "startDate": "2025-08-11",
+  "endDate": "2025-08-11",
+  "destinations": ["Pokhara", "Jomsom", "Muktinath", "Manakamana"],
   "budget": {
     "total": 50000,
     "spent": 0

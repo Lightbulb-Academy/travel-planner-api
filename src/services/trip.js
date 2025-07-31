@@ -7,4 +7,53 @@ const create = asyncHandler(async (req, res) => {
   res.status(201).json(trip);
 });
 
-export { create };
+const findAll = asyncHandler(async (req, res) => {
+  const trips = await Trip.find({ user: req.user.userId });
+  res.status(200).json(trips);
+});
+
+const findById = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOne({
+    _id: req.params.id,
+    user: req.user.userId,
+  });
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+  res.status(200).json(trip);
+});
+
+const update = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOneAndUpdate(
+    { _id: req.params.id, user: req.user.userId },
+    {
+      ...(req.body.title && { title: req.body.title }),
+      ...(req.body.description && { description: req.body.description }),
+      ...(req.body.startDate && { startDate: req.body.startDate }),
+      ...(req.body.endDate && { endDate: req.body.endDate }),
+      ...(req.body.destinations && { destinations: req.body.destinations }),
+      ...(req.body.budget && { budget: req.body.budget }),
+    },
+    { new: true }
+  );
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+  res.status(200).json(trip);
+});
+
+const remove = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOneAndDelete({
+    _id: req.params.id,
+    user: req.user.userId,
+  });
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+  res.status(200).json({ message: "Trip deleted successfully" });
+});
+
+export { create, findAll, findById, update, remove };
