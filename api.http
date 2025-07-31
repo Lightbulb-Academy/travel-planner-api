@@ -77,3 +77,22 @@ Authorization: Bearer {{token}}
     "spent": 0
   }
 }
+
+### Get all trips
+GET {{baseUrl}}/trips
+Authorization: Bearer {{token}}
+
+### Get a trip by id
+GET {{baseUrl}}/trips/6889f237ea517db3436eb505
+Authorization: Bearer {{token}}
+
+### Add an expense to a trip
+POST {{baseUrl}}/trips/6889f237ea517db3436eb505/expenses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "date": "2025-08-11",
+  "amount": 1200,
+  "name": "Taxi Fare"
+}

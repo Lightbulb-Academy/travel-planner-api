@@ -9,6 +9,10 @@ const ExpenseSchema = new Schema({
     type: Number,
     required: true,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
 });
 
 const BudgetSchema = new Schema({

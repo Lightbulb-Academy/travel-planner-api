@@ -56,4 +56,27 @@ const remove = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Trip deleted successfully" });
 });
 
-export { create, findAll, findById, update, remove };
+const addExpenses = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOne({
+    _id: req.params.id,
+    user: req.user.userId,
+  });
+
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+
+  const date = req.body.date || new Date();
+  trip.budget.expenses.push({
+    ...req.body,
+    date,
+  });
+
+  trip.budget.spent += req.body.amount || 0;
+  await trip.save();
+
+  res.status(200).json(trip);
+});
+
+export { create, findAll, findById, update, remove, addExpenses };
