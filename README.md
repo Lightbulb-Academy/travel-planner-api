@@ -4,28 +4,6 @@ A comprehensive travel planning and management API built with Node.js, Express, 
 
 ## 🚀 Features
 
-### ✅ Currently Implemented
-
-- **User Authentication & Authorization**
-  - JWT-based authentication
-  - User registration and login
-  - Protected routes with middleware
-- **Trip Management**
-  - Create, read, update, delete trips
-  - Budget planning and tracking
-  - Expense management
-  - Multiple destinations support
-- **Packing Lists**
-  - Create and manage packing items
-  - Mark items as completed
-  - User-specific lists
-- **Data Validation**
-  - Input validation using express-validator
-  - Custom validation middleware
-- **Database Integration**
-  - MongoDB with Mongoose ODM
-  - Proper data modeling and relationships
-
 ### 🚧 In Progress / Missing Features
 
 - Error handler middleware
@@ -79,148 +57,6 @@ A comprehensive travel planning and management API built with Node.js, Express, 
    ```
 
 The server will start on `http://localhost:5000`
-
-## 📚 API Documentation
-
-### Authentication Endpoints
-
-#### Register User
-
-```http
-POST /auth/register
-Content-Type: application/json
-
-{
-  "name": "John Doe",
-  "email": "john.doe@example.com",
-  "password": "password123"
-}
-```
-
-#### Login User
-
-```http
-POST /auth/login
-Content-Type: application/json
-
-{
-  "email": "john.doe@example.com",
-  "password": "password123"
-}
-```
-
-### Trip Endpoints
-
-#### Create Trip
-
-```http
-POST /trips
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Europe Adventure",
-  "description": "Exploring Europe for 2 weeks",
-  "startDate": "2024-06-01",
-  "endDate": "2024-06-15",
-  "destinations": ["Paris", "Rome", "Barcelona"],
-  "budget": {
-    "total": 5000,
-    "spent": 0
-  }
-}
-```
-
-#### Get All Trips
-
-```http
-GET /trips
-Authorization: Bearer <token>
-```
-
-#### Get Trip by ID
-
-```http
-GET /trips/:id
-Authorization: Bearer <token>
-```
-
-#### Update Trip
-
-```http
-PUT /trips/:id
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "title": "Updated Trip Title",
-  "budget": {
-    "total": 6000,
-    "spent": 1200
-  }
-}
-```
-
-#### Delete Trip
-
-```http
-DELETE /trips/:id
-Authorization: Bearer <token>
-```
-
-#### Add Expense to Trip
-
-```http
-POST /trips/:id/expenses
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Hotel Booking",
-  "amount": 200,
-  "date": "2024-06-01"
-}
-```
-
-### Packing List Endpoints
-
-#### Create Packing Item
-
-```http
-POST /package-lists
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "name": "Passport"
-}
-```
-
-#### Get All Packing Items
-
-```http
-GET /package-lists
-Authorization: Bearer <token>
-```
-
-#### Update Packing Item
-
-```http
-PATCH /package-lists/:id
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "completed": true
-}
-```
-
-#### Delete Packing Item
-
-```http
-DELETE /package-lists/:id
-Authorization: Bearer <token>
-```
 
 ## 📖 5-Week Learning Syllabus
 
@@ -405,6 +241,183 @@ Authorization: Bearer <token>
 - Review and rating system
 - Performance optimizations
 - Production-ready application
+
+---
+
+## 📖 React Frontend Syllabus (5 Weeks)
+
+### Week 1: React Fundamentals & Setup ⚛️
+
+**Learning Objectives:**
+
+- Understand React fundamentals and JSX
+- Set up React development environment
+- Learn component-based architecture
+- Implement basic state management
+
+**Topics Covered:**
+
+- React basics and JSX syntax
+- Functional components and props
+- React hooks (useState, useEffect)
+- Component lifecycle
+- Event handling in React
+- React Developer Tools
+
+**Hands-on Activities:**
+
+- Set up React project with Create React App or Vite
+- Create basic components (Header, Footer, Navigation)
+- Implement user authentication forms (Login/Register)
+- Build responsive navigation with React Router
+- Create protected route components
+- Implement basic form validation
+
+**Deliverables:**
+
+- Working React application setup
+- Authentication UI components
+- Navigation and routing structure
+- Basic form handling and validation
+
+---
+
+### Week 2: State Management & API Integration 🔄
+
+**Learning Objectives:**
+
+- Implement state management with Context API
+- Learn API integration with React
+- Handle loading and error states
+- Implement proper data flow
+
+**Topics Covered:**
+
+- React Context API for global state
+- Custom hooks for API calls
+- Async/await with React
+- Error boundaries and error handling
+- Loading states and user feedback
+- HTTP client setup (axios/fetch)
+
+**Hands-on Activities:**
+
+- Set up Context API for authentication state
+- Create custom hooks for API calls
+- Implement user authentication flow
+- Build loading and error components
+- Create reusable API service layer
+- Implement token management and storage
+
+**Deliverables:**
+
+- Global state management with Context API
+- API integration layer
+- Authentication flow implementation
+- Error handling and loading states
+
+---
+
+### Week 3: Trip Management UI 🗺️
+
+**Learning Objectives:**
+
+- Build comprehensive trip management interface
+- Implement CRUD operations for trips
+- Create responsive and user-friendly forms
+- Add data visualization for trip information
+
+**Topics Covered:**
+
+- Form handling with React Hook Form
+- Date picker components
+- Multi-step forms
+- Data visualization with charts
+- Responsive design principles
+- Form validation and error handling
+
+**Hands-on Activities:**
+
+- Create trip creation/editing forms
+- Build trip listing and detail views
+- Implement trip search and filtering
+- Add date range pickers for trip planning
+- Create budget visualization components
+- Build responsive trip cards and layouts
+
+**Deliverables:**
+
+- Complete trip management interface
+- Trip creation and editing forms
+- Trip listing and detail views
+- Budget tracking visualization
+
+---
+
+### Week 4: Advanced UI Components & User Experience 🎨
+
+**Learning Objectives:**
+
+- Implement advanced UI components
+- Enhance user experience with animations
+- Add interactive features
+- Implement responsive design patterns
+
+**Topics Covered:**
+
+- Advanced React patterns (HOCs, render props)
+- Animation libraries (Framer Motion)
+- Drag and drop functionality
+- Modal and overlay components
+- Toast notifications
+- Progressive Web App features
+
+**Hands-on Activities:**
+
+- Build packing list with drag-and-drop
+- Create modal components for trip details
+- Implement toast notifications
+- Add smooth animations and transitions
+- Create interactive maps integration
+- Build responsive dashboard layouts
+
+**Deliverables:**
+
+- Interactive packing list component
+- Modal and overlay system
+- Animation and transition effects
+- Responsive dashboard interface
+
+---
+
+### Week 5: Advanced Features & Optimization 🚀
+
+**Learning Objectives:**
+
+- Implement advanced React features
+- Optimize application performance
+- Prepare for production deployment
+
+**Topics Covered:**
+
+- React performance optimization
+- Code splitting and lazy loading
+- Progressive Web App implementation
+- Testing with React Testing Library
+- Deployment
+
+**Hands-on Activities:**
+
+- Optimize bundle size and loading
+- Implement search and filtering
+- Add image upload and management
+- Set up testing and deployment pipeline
+
+**Deliverables:**
+
+- Performance optimizations
+- Testing suite implementation
+- Production-ready frontend
 
 ---
 
