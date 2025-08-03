@@ -1,13 +1,15 @@
 import { body } from "express-validator";
 
 export const createTripValidator = [
-  body("title").notEmpty().withMessage("Title is required"),
+  body("title").trim().notEmpty().withMessage("Title is required"),
   body("startDate")
+    .trim()
     .notEmpty()
     .withMessage("Start date is required")
     .isDate()
     .withMessage("Start date must be a date"),
   body("endDate")
+    .trim()
     .notEmpty()
     .withMessage("End date is required")
     .isDate()
@@ -18,19 +20,30 @@ export const createTripValidator = [
       }
       return true;
     }),
-  body("destinations").isArray().withMessage("Destinations must be an array"),
-  body("budget.total").isNumeric().withMessage("Budget must be a number"),
-  body("budget.spent").isNumeric().withMessage("Spent amount must be a number"),
+  body("destinations")
+    .trim()
+    .isArray()
+    .withMessage("Destinations must be an array"),
+  body("budget.total")
+    .trim()
+    .isNumeric()
+    .withMessage("Budget must be a number"),
+  body("budget.spent")
+    .trim()
+    .isNumeric()
+    .withMessage("Spent amount must be a number"),
   body("budget.expenses")
     .optional()
     .isArray()
     .withMessage("Expenses must be an array"),
   body("budget.expenses.*.name")
     .optional()
+    .trim()
     .notEmpty()
     .withMessage("Expense name is required"),
   body("budget.expenses.*.amount")
     .optional()
+    .trim()
     .isNumeric()
     .withMessage("Expense amount must be a number"),
 ];

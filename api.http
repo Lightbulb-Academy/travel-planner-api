@@ -96,3 +96,32 @@ Authorization: Bearer {{token}}
   "amount": 1200,
   "name": "Taxi Fare"
 }
+
+### Create an itinerary
+POST {{baseUrl}}/itineraries
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "tripId": "6889f237ea517db3436eb505",
+  "title": "Day 1",
+  "description": "This is a description of the itinerary Day 1",
+  "date": "2025-07-31",
+  "activities": [
+    {
+      "name": "Check in at Hotel",
+      "time": "08:00 AM",
+      "notes": ["Check In", "Breakfast", "Rest"]
+    },
+    {
+      "name": "Visit Lake Side",
+      "time": "11:00 AM - 02:00 PM",
+      "notes": ["Visit Lake Side", "Tal Barahi Temple", "Do Boating", "Click Pictures"]
+    },
+    {
+      "name": "Visit Street 9",
+      "time": "02:00 PM - 03:00 PM",
+      "notes": ["Have Lunch", "Hire a Cab"]
+    }
+  ]
+}
