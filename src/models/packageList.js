@@ -9,9 +9,9 @@ const packageListSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  user: {
+  trip: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "Trip",
     required: true,
   },
 });

@@ -1,7 +1,7 @@
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 
 export const createItineraryValidator = [
-  body("tripId")
+  param("tripId")
     .trim()
     .notEmpty()
     .withMessage("Trip is required")
