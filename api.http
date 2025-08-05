@@ -98,7 +98,7 @@ Authorization: Bearer {{token}}
 }
 
 ### Create an itinerary
-POST {{baseUrl}}/itineraries
+POST {{baseUrl}}/itineraries/6889f237ea517db3436eb506
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

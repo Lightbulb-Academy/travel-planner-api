@@ -12,12 +12,8 @@ const createUser = asyncHandler(async (userData) => {
 });
 
 const create = asyncHandler(async (req, res) => {
-  try {
-    const user = await createUser(req.body);
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+  const user = await createUser(req.body);
+  res.status(201).json(user);
 });
 
 export { create, createUser };
