@@ -2,8 +2,6 @@ import asyncHandler from "express-async-handler";
 import PackageList from "../models/packageList.js";
 import Trip from "../models/trip.js";
 
-// old - http://localhost:5000/package-lists
-// new - http://localhost:5000/package-lists/:tripId
 export const create = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
@@ -17,7 +15,11 @@ export const create = asyncHandler(async (req, res) => {
     throw new Error("Trip not found");
   }
 
-  const packageList = await PackageList.create({ name, trip: trip._id });
+  const packageList = await PackageList.create({
+    name,
+    trip: req.params.tripId,
+    user: req.user.userId,
+  });
   res.status(201).json(packageList);
 });
 
@@ -34,6 +36,7 @@ export const findAll = asyncHandler(async (req, res) => {
 
   const packageLists = await PackageList.find({
     trip: req.params.tripId,
+    user: req.user.userId,
   });
 
   res.status(200).json(packageLists);
@@ -55,6 +58,7 @@ export const findById = asyncHandler(async (req, res) => {
   const packageList = await PackageList.findOne({
     _id: id,
     trip: tripId,
+    user: req.user.userId,
   });
 
   if (!packageList) {
@@ -81,6 +85,7 @@ export const update = asyncHandler(async (req, res) => {
     {
       _id: id,
       trip: tripId,
+      user: req.user.userId,
     },
     {
       ...(req.body.name && { name: req.body.name }),
@@ -111,6 +116,7 @@ export const remove = asyncHandler(async (req, res) => {
   const packageList = await PackageList.findOneAndDelete({
     _id: id,
     trip: tripId,
+    user: req.user.userId,
   });
 
   if (!packageList) {

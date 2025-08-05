@@ -14,6 +14,11 @@ const packageListSchema = new Schema({
     ref: "Trip",
     required: true,
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const PackageList = model("PackageList", packageListSchema);
