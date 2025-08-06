@@ -47,3 +47,18 @@ export const createTripValidator = [
     .isNumeric()
     .withMessage("Expense amount must be a number"),
 ];
+
+export const inviteCollaboratorValidator = [
+  body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isArray()
+    .withMessage("Email must be an array"),
+  body("email.*")
+    .trim()
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Invalid email address"),
+];

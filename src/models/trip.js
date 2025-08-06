@@ -55,6 +55,12 @@ const TripSchema = new Schema({
     },
   ],
   budget: BudgetSchema,
+  collaborators: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 const Trip = model("Trip", TripSchema);

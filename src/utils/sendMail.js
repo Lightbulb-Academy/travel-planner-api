@@ -5,17 +5,17 @@ dotenv.config();
 
 export const sendMail = async (email, subject, text) => {
   const transporter = createTransport({
-    host: process.env.EMAIL_HOST,
-    port: process.env.EMAIL_PORT,
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: email,
+    from: process.env.MAIL_FROM,
+    to: email.join(","),
     subject,
     text,
   };

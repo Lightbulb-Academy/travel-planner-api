@@ -1,5 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Trip from "../models/trip.js";
+import { generateToken } from "./auth.js";
+import { sendMail } from "../utils/sendMail.js";
 
 const create = asyncHandler(async (req, res) => {
   const { userId } = req.user;
@@ -79,4 +81,28 @@ const addExpenses = asyncHandler(async (req, res) => {
   res.status(200).json(trip);
 });
 
-export { create, findAll, findById, update, remove, addExpenses };
+const inviteCollaborator = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOne({
+    _id: req.params.id,
+    user: req.user.userId,
+  });
+
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+  const token = await generateToken(trip._id);
+  const intivationLink = `http://localhost:5000/trips/${trip._id}/invite/accept?token=${token}`;
+  await sendMail(req.body.email, "Invitation to collaborate", intivationLink);
+  res.status(200).json({ message: "Invitation sent successfully" });
+});
+
+export {
+  create,
+  findAll,
+  findById,
+  update,
+  remove,
+  addExpenses,
+  inviteCollaborator,
+};

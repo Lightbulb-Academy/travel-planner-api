@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createTripValidator } from "../validators/trip.js";
+import {
+  createTripValidator,
+  inviteCollaboratorValidator,
+} from "../validators/trip.js";
 import {
   create,
   findAll,
@@ -7,6 +10,7 @@ import {
   update,
   remove,
   addExpenses,
+  inviteCollaborator,
 } from "../services/trip.js";
 import { useValidator } from "../middlewares/useValidator.js";
 
@@ -18,5 +22,10 @@ router.get("/:id", findById);
 router.put("/:id", update);
 router.delete("/:id", remove);
 router.post("/:id/expenses", addExpenses);
+router.post(
+  "/:id/invite",
+  useValidator(inviteCollaboratorValidator),
+  inviteCollaborator
+);
 
 export default router;
