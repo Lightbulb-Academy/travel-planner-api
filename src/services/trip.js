@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 import Trip from "../models/trip.js";
-import { generateToken } from "./auth.js";
 import { sendMail } from "../utils/sendMail.js";
+import jwt from "jsonwebtoken";
 
 const create = asyncHandler(async (req, res) => {
   const { userId } = req.user;
@@ -91,10 +91,27 @@ const inviteCollaborator = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Trip not found");
   }
-  const token = await generateToken(trip._id);
+
+  const token = jwt.sign({ tripId: req.params.id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
   const intivationLink = `http://localhost:5000/trips/${trip._id}/invite/accept?token=${token}`;
   await sendMail(req.body.email, "Invitation to collaborate", intivationLink);
   res.status(200).json({ message: "Invitation sent successfully" });
+});
+
+const acceptInvitation = asyncHandler(async (req, res) => {
+  const { token } = req.query;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const trip = await Trip.findById(decoded.tripId);
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+  trip.collaborators.push(req.user.userId);
+  await trip.save();
+  res.status(200).json({ message: "Invitation accepted successfully" });
 });
 
 export {
@@ -105,4 +122,5 @@ export {
   remove,
   addExpenses,
   inviteCollaborator,
+  acceptInvitation,
 };

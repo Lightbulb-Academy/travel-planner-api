@@ -11,6 +11,7 @@ import {
   remove,
   addExpenses,
   inviteCollaborator,
+  acceptInvitation,
 } from "../services/trip.js";
 import { useValidator } from "../middlewares/useValidator.js";
 
@@ -27,5 +28,6 @@ router.post(
   useValidator(inviteCollaboratorValidator),
   inviteCollaborator
 );
+router.get("/:id/invite/accept", acceptInvitation);
 
 export default router;
