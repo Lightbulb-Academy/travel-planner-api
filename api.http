@@ -127,12 +127,12 @@ Authorization: Bearer {{token}}
 }
 
 ### Invite a collaborator to a trip
-POST {{baseUrl}}/trips/6889f237ea517db3436eb505/invite
+POST {{baseUrl}}/trips/688b489d79c3e839f6cf0c4f/invite
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "email": ["john.doe2@gmail.com", "john.doe3@gmail.com"]
+  "email": ["john.doe3@gmail.com", "john.doe4@gmail.com"]
 }
 
 ### Accept an invitation to a trip
