@@ -85,7 +85,7 @@ const inviteCollaborator = asyncHandler(async (req, res) => {
   const trip = await Trip.findOne({
     _id: req.params.id,
     user: req.user.userId,
-  });
+  }).populate("user", "name");
 
   if (!trip) {
     res.status(404);
@@ -97,7 +97,13 @@ const inviteCollaborator = asyncHandler(async (req, res) => {
   });
 
   const intivationLink = `http://localhost:5000/trips/${trip._id}/invite/accept?token=${token}`;
-  await sendMail(req.body.email, "Invitation to collaborate", intivationLink);
+  await sendMail(req.body.email, "Invitation to collaborate", {
+    title: trip.title,
+    startDate: trip.startDate.toDateString(),
+    endDate: trip.endDate.toDateString(),
+    userName: trip.user.name,
+    link: intivationLink,
+  });
   res.status(200).json({ message: "Invitation sent successfully" });
 });
 
