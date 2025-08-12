@@ -132,7 +132,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "email": ["john.doe3@gmail.com", "john.doe4@gmail.com"]
+  "email": ["cloveit2024@gmail.com"]
 }
 
 ### Accept an invitation to a trip

@@ -10,14 +10,20 @@ const create = asyncHandler(async (req, res) => {
 });
 
 const findAll = asyncHandler(async (req, res) => {
-  const trips = await Trip.find({ user: req.user.userId });
+  const trips = await Trip.find({
+    $or: [
+      { user: req.user.userId },
+      { collaborators: req.user.userId },
+      // { collaborators: { $in: [req.user.userId] } },
+    ],
+  });
   res.status(200).json(trips);
 });
 
 const findById = asyncHandler(async (req, res) => {
   const trip = await Trip.findOne({
     _id: req.params.id,
-    user: req.user.userId,
+    $or: [{ user: req.user.userId }, { collaborators: req.user.userId }],
   });
   if (!trip) {
     res.status(404);
@@ -61,7 +67,7 @@ const remove = asyncHandler(async (req, res) => {
 const addExpenses = asyncHandler(async (req, res) => {
   const trip = await Trip.findOne({
     _id: req.params.id,
-    user: req.user.userId,
+    $or: [{ user: req.user.userId }, { collaborators: req.user.userId }],
   });
 
   if (!trip) {
