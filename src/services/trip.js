@@ -2,6 +2,8 @@ import asyncHandler from "express-async-handler";
 import Trip from "../models/trip.js";
 import { sendMail } from "../utils/sendMail.js";
 import jwt from "jsonwebtoken";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
 const create = asyncHandler(async (req, res) => {
   const { userId } = req.user;
@@ -126,6 +128,41 @@ const acceptInvitation = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Invitation accepted successfully" });
 });
 
+const uploadFiles = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOne({
+    _id: req.params.id,
+    $or: [{ user: req.user.userId }, { collaborators: req.user.userId }],
+  });
+
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+
+  if (req.files.length > 4) {
+    res.status(400);
+    throw new Error("You can only upload up to 4 images/videos");
+  }
+
+  await Promise.all(
+    req.files.map(async (file) => {
+      const result = await cloudinary.uploader.upload(file.path, {
+        resource_type: "auto",
+        folder: `wander-wise/trips/${trip.title}_${trip._id}`,
+        overwrite: false,
+        use_filename: true,
+        unique_filename: true,
+      });
+      trip.files.push(result.secure_url);
+      fs.unlinkSync(file.path);
+    })
+  );
+
+  await trip.save();
+
+  res.status(200).json(trip);
+});
+
 export {
   create,
   findAll,
@@ -135,4 +172,5 @@ export {
   addExpenses,
   inviteCollaborator,
   acceptInvitation,
+  uploadFiles,
 };

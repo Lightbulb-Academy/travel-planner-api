@@ -61,6 +61,11 @@ const TripSchema = new Schema({
       ref: "User",
     },
   ],
+  files: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const Trip = model("Trip", TripSchema);

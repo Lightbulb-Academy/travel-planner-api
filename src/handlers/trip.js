@@ -12,10 +12,14 @@ import {
   addExpenses,
   inviteCollaborator,
   acceptInvitation,
+  uploadFiles,
 } from "../services/trip.js";
 import { useValidator } from "../middlewares/useValidator.js";
+import multer from "multer";
 
 const router = Router();
+
+const upload = multer({ dest: "uploads/" });
 
 router.post("/", useValidator(createTripValidator), create);
 router.get("/", findAll);
@@ -29,5 +33,6 @@ router.post(
   inviteCollaborator
 );
 router.get("/:id/invite/accept", acceptInvitation);
+router.post("/:id/files", upload.array("files"), uploadFiles);
 
 export default router;
