@@ -153,7 +153,12 @@ const uploadFiles = asyncHandler(async (req, res) => {
         use_filename: true,
         unique_filename: true,
       });
-      trip.files.push(result.secure_url);
+
+      trip.files.push({
+        url: result.secure_url,
+        publicId: result.public_id,
+      });
+
       fs.unlinkSync(file.path);
     })
   );
@@ -161,6 +166,33 @@ const uploadFiles = asyncHandler(async (req, res) => {
   await trip.save();
 
   res.status(200).json(trip);
+});
+
+const deleteFile = asyncHandler(async (req, res) => {
+  const trip = await Trip.findOne({
+    _id: req.params.id,
+    $or: [{ user: req.user.userId }, { collaborators: req.user.userId }],
+  });
+
+  if (!trip) {
+    res.status(404);
+    throw new Error("Trip not found");
+  }
+
+  const file = trip.files?.find((file) => file?.publicId === req.params.fileId);
+
+  if (!file) {
+    res.status(404);
+    throw new Error("File not found");
+  }
+
+  await cloudinary.uploader.destroy(file.publicId);
+  trip.files = trip.files?.filter(
+    (file) => file?.publicId !== req.params.fileId
+  );
+  await trip.save();
+
+  res.status(200).json({ message: "File deleted successfully" });
 });
 
 export {
@@ -173,4 +205,5 @@ export {
   inviteCollaborator,
   acceptInvitation,
   uploadFiles,
+  deleteFile,
 };

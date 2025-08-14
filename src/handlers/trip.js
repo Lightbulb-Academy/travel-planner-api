@@ -13,6 +13,7 @@ import {
   inviteCollaborator,
   acceptInvitation,
   uploadFiles,
+  deleteFile,
 } from "../services/trip.js";
 import { useValidator } from "../middlewares/useValidator.js";
 import multer from "multer";
@@ -34,5 +35,6 @@ router.post(
 );
 router.get("/:id/invite/accept", acceptInvitation);
 router.post("/:id/files", upload.array("files"), uploadFiles);
+router.delete("/:id/files/:fileId", deleteFile);
 
 export default router;

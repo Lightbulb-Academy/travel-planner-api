@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:5000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODgzNTQyOTYwMDQzN2MwNjc2NWY1ZDEiLCJpYXQiOjE3NTM3ODY0MjMsImV4cCI6MTc1NTA4MjQyM30.dRty9opHACgf001-9PaI1Zu2bMMi3fjZ-bkZGgM3e5c
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODgzNTQyOTYwMDQzN2MwNjc2NWY1ZDEiLCJpYXQiOjE3NTUxNjY0MjEsImV4cCI6MTc1NjQ2MjQyMX0.d5q__dqdhnn5LoPffoT_CoOxMa2jfpQbWuAT4TPprR4
 
 ### Create a package list
 POST {{baseUrl}}/package-lists
@@ -139,3 +139,6 @@ Authorization: Bearer {{token}}
 GET {{baseUrl}}/trips/6889f237ea517db3436eb505/invite/accept?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0cmlwSWQiOiI2ODg5ZjIzN2VhNTE3ZGIzNDM2ZWI1MDUiLCJpYXQiOjE3NTQ1NjQwMTksImV4cCI6MTc1NDU2NzYxOX0.r3w2wFt_hMAswEPUcecP2YROL2itUmiJCtYwszflk1k
 Authorization: Bearer {{token}}
 
+### Delete a file from a trip
+DELETE {{baseUrl}}/trips/688b489d79c3e839f6cf0c4f/files/688b489d79c3e839f6cf0c4f
+Authorization: Bearer {{token}}
